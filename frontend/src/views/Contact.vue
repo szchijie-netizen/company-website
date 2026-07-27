@@ -91,7 +91,8 @@ async function handleSubmit() {
   submitError.value = ""
   submitting.value = true
   try {
-    await axios.post("/api/contact/", {
+    const apiBase = import.meta.env.VITE_API_URL || ''
+    await axios.post(`${apiBase}/api/contact/`, {
       name: form.name,
       company: form.company,
       email: form.email,
