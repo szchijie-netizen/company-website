@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.conf import settings
+from django.core.mail import send_mail
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -26,6 +27,29 @@ class ContactCreateView(APIView):
     def post(self, request):
         serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            contact = serializer.save()
+            self._send_notification(contact)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def _send_notification(self, contact):
+        try:
+            subject = f"New Inquiry from {contact.name} - {contact.get_inquiry_type_display()}"
+            body = (
+                f"Name: {contact.name}\n"
+                f"Company: {contact.company or "N/A"}\n"
+                f"Email: {contact.email}\n"
+                f"Phone: {contact.phone or "N/A"}\n"
+                f"Type: {contact.get_inquiry_type_display()}\n"
+                f"Message:\n{contact.message}\n"
+            )
+            notify_email = getattr(settings, "NOTIFICATION_EMAIL", "szchijie@gmail.com")
+            send_mail(
+                subject=subject,
+                message=body,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[notify_email],
+                fail_silently=True,
+            )
+        except Exception:
+            pass
