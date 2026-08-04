@@ -23,7 +23,7 @@
 
 <script setup>
 const products = [
-  { name: "Luxury Watches", category: "Timepieces", desc: "完全中国制造，保证100%还原。甚至于我们的手表质量更高细节更好，让您花费极小的金钱，买来那些你耳熟能详的手表。" },
+  { name: "Luxury Watches", category: "Timepieces", desc: "Precision-crafted timepieces manufactured in China with meticulous attention to detail. Our watches deliver exceptional quality and finish, offering iconic designs at accessible prices — superior craftsmanship that rivals established luxury brands at a fraction of the cost." },
   { name: "Eyeglass Frames", category: "Optical", desc: "Handcrafted frames in acetate, pure titanium, precious metal (gold/platinum), TR90 polymer, natural wood, and carbon fiber — lightweight, hypoallergenic, and precision-engineered." },
   { name: "Sunglasses", category: "Eyewear", desc: "Polarized and UV400 protection lenses in premium frames. Classic aviators, wayfarers, cat-eye, and sport wraparound styles with mirror, gradient, and photochromic options." },
   { name: "Smart Glasses", category: "Tech", desc: "Bluetooth-enabled smart eyewear with open-ear audio, voice assistant integration, UV protection lenses, 1080p video recording, and all-day battery life — where fashion meets functionality." },
